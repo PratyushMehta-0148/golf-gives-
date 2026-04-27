@@ -116,8 +116,8 @@ golfcharity/
 
 | Role | Email | Password |
 |------|-------|----------|
-| Admin | admin@golfgives.com | (set during signup) |
-| Subscriber | user@golfgives.com | (set during signup) |
+| Admin | abc@golfgives.com | (12345678) |
+| Subscriber | user@golfgives.com | (123456789) |
 
 ---
 
