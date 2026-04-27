@@ -2,10 +2,8 @@
 
 A subscription-driven golf performance tracking platform combining Stableford score tracking, monthly prize draws, and charity fundraising.
 
-Built for the **Digital Heroes Full-Stack Trainee Selection** assignment.
 
-**Live Demo:** `[your-vercel-url]`  
-**Test Credentials:** See bottom of this README
+**Live Demo:** `[(https://golf-gives-8e6dwus7q-pratyushmehta-0148s-projects.vercel.app/signup)]`  
 
 ---
 
@@ -110,73 +108,7 @@ golfcharity/
 - **New** Supabase account (not personal/existing — per PRD requirement)
 - **New** Vercel account (not personal/existing — per PRD requirement)
 
-### Step 1 — Supabase Setup
 
-1. Go to [supabase.com](https://supabase.com) → Create new account → New project
-2. Wait for project to provision (~2 minutes)
-3. Go to **SQL Editor** → New Query
-4. Paste the full contents of `supabase_schema.sql` → Click **Run**
-5. Go to **Settings → API** → Copy:
-   - `Project URL`
-   - `anon public` key
-
-#### Enable Storage (for winner proof uploads)
-1. Go to **Storage** in the Supabase sidebar
-2. Create a new bucket called `winner-proofs`
-3. Set it to **Public** (so admin can view uploaded proofs)
-
-### Step 2 — Environment Variables
-
-Create a `.env` file (copy from `.env.example`):
-
-```env
-VITE_SUPABASE_URL=https://xxxxxxxxxxxx.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-```
-
-### Step 3 — Deploy to Vercel
-
-1. Push this repo to a new GitHub repository
-2. Go to [vercel.com](https://vercel.com) → Create new account → **Add New Project**
-3. Import your GitHub repo
-4. In **Environment Variables**, add:
-   - `VITE_SUPABASE_URL` — your Supabase project URL
-   - `VITE_SUPABASE_ANON_KEY` — your Supabase anon key
-5. Framework Preset: **Vite**
-6. Click **Deploy**
-
-### Step 4 — Create Admin Account
-
-1. Sign up on the live site using your admin email
-2. Go to Supabase → **SQL Editor** → Run:
-
-```sql
-UPDATE profiles
-SET role = 'admin'
-WHERE email = 'your-admin-email@example.com';
-```
-
-3. Sign out and sign back in → `/admin` will now be accessible
-
-### Step 5 — Verify Everything Works
-
-Run through the full testing checklist:
-
-- [ ] Sign up (all 3 steps complete)
-- [ ] Login / logout
-- [ ] Score entry — add 5 scores, try a duplicate date (should fail)
-- [ ] Add a 6th score — oldest should be removed automatically
-- [ ] Edit and delete a score
-- [ ] View dashboard — all sections render
-- [ ] Change charity and contribution %
-- [ ] Admin: Add a charity
-- [ ] Admin: Run a draw simulation
-- [ ] Admin: Publish a draw
-- [ ] Check `/draws` page shows the published result
-- [ ] Admin: View winners, approve a winner, mark as paid
-- [ ] Test on mobile viewport
-
----
 
 ## Test Credentials
 
@@ -224,4 +156,4 @@ This keeps the draw results consistent and avoids re-computation on every page l
 
 ---
 
-Built with ❤️ for the Digital Heroes selection process.
+Built with ❤️ by Pratyush Mehta
