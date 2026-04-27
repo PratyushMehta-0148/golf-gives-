@@ -1,9 +1,6 @@
 -- ============================================================
 -- GOLFGIVES PLATFORM — SUPABASE SCHEMA
--- Run this in your new Supabase project's SQL editor
--- ============================================================
 
--- Enable UUID extension
 create extension if not exists "uuid-ossp";
 
 -- ─────────────────────────────────────────────
@@ -50,9 +47,8 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
--- ─────────────────────────────────────────────
+
 -- CHARITIES
--- ─────────────────────────────────────────────
 create table public.charities (
   id uuid default uuid_generate_v4() primary key,
   name text not null,
@@ -82,9 +78,8 @@ insert into public.charities (name, description, image_url, is_featured) values
   ('Age UK', 'Championing the rights and needs of older people across the UK.', 'https://images.unsplash.com/photo-1574279606130-09958dc756f7?w=400', false),
   ('Mind', 'Mental health charity providing advice and support to empower anyone experiencing a mental health problem.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400', false);
 
--- ─────────────────────────────────────────────
+
 -- GOLF SCORES
--- ─────────────────────────────────────────────
 create table public.golf_scores (
   id uuid default uuid_generate_v4() primary key,
   user_id uuid references public.profiles(id) on delete cascade not null,
@@ -133,10 +128,9 @@ create trigger enforce_rolling_scores
   before insert on public.golf_scores
   for each row execute function public.enforce_max_scores();
 
--- ─────────────────────────────────────────────
+
 -- DRAWS
--- ─────────────────────────────────────────────
-create table public.draws (
+  create table public.draws (
   id uuid default uuid_generate_v4() primary key,
   month integer not null check (month between 1 and 12),
   year integer not null,
@@ -160,10 +154,9 @@ create policy "Admins can manage draws" on public.draws
     exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
   );
 
--- ─────────────────────────────────────────────
 -- DRAW ENTRIES (which users entered each draw)
--- ─────────────────────────────────────────────
-create table public.draw_entries (
+
+  create table public.draw_entries (
   id uuid default uuid_generate_v4() primary key,
   draw_id uuid references public.draws(id) on delete cascade not null,
   user_id uuid references public.profiles(id) on delete cascade not null,
@@ -233,7 +226,3 @@ create policy "Admins can view all events" on public.subscription_events
   );
 
 -- ─────────────────────────────────────────────
--- ADMIN SEED (run after creating your admin account)
--- Replace the email below with your admin user's email
--- ─────────────────────────────────────────────
--- update public.profiles set role = 'admin' where email = 'admin@yourdomain.com';
